@@ -2,7 +2,6 @@
 
 namespace Anomaly\MakerExtension\Console;
 
-use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Addon\AddonCollection;
 use Anomaly\MakerExtension\Console\Command\AppendEntityBindings;
 use Anomaly\MakerExtension\Console\Command\AppendEntityButtonLang;
@@ -30,20 +29,18 @@ use Anomaly\MakerExtension\Console\Command\WriteEntityTableBuilder;
 use Anomaly\MakerExtension\Console\Command\WriteEntityTestCases;
 use Anomaly\MakerExtension\Console\Command\WriteEntityTreeBuilder;
 use Illuminate\Console\Command;
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class Make
+ * Class MakeStream
  *
  * @link   http://pyrocms.com/
  * @author PyroCMS, Inc. <support@pyrocms.com>
  * @author Ryan Thompson <ryan@pyrocms.com>
  */
-class Make extends Command
+class MakeStream extends Command
 {
-    use DispatchesJobs;
 
     /**
      * The console command name.
@@ -76,48 +73,48 @@ class Make extends Command
             $namespace = $addon->getSlug();
         }
 
-        $this->dispatchNow(new WriteEntityModel($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityRouter($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntitySeeder($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityFactory($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityObserver($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityCriteria($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityPresenter($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityCollection($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityRepository($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityFormBuilder($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityController($addon, $slug, $namespace, $nested));
+        dispatch_now(new WriteEntityModel($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityRouter($addon, $slug, $namespace));
+        dispatch_now(new WriteEntitySeeder($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityFactory($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityObserver($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityCriteria($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityPresenter($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityCollection($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityRepository($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityFormBuilder($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityController($addon, $slug, $namespace, $nested));
 
         if ($nested) {
-            $this->dispatchNow(new WriteEntityTreeBuilder($addon, $slug, $namespace));
+            dispatch_now(new WriteEntityTreeBuilder($addon, $slug, $namespace));
         }
 
         if (!$nested) {
-            $this->dispatchNow(new WriteEntityTableBuilder($addon, $slug, $namespace));
+            dispatch_now(new WriteEntityTableBuilder($addon, $slug, $namespace));
         }
 
-        $this->dispatchNow(new WriteEntityModelInterface($addon, $slug, $namespace));
-        $this->dispatchNow(new WriteEntityRepositoryInterface($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityModelInterface($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityRepositoryInterface($addon, $slug, $namespace));
 
         // Run this last since it scans the above.
-        $this->dispatchNow(new WriteEntityTestCases($addon, $slug, $namespace));
+        dispatch_now(new WriteEntityTestCases($addon, $slug, $namespace));
 
         // Modify existing addon classes.
-        $this->dispatchNow(new AppendEntityBindings($addon, $slug, $namespace));
-        $this->dispatchNow(new AppendEntitySingletons($addon, $slug, $namespace));
+        dispatch_now(new AppendEntityBindings($addon, $slug, $namespace));
+        dispatch_now(new AppendEntitySingletons($addon, $slug, $namespace));
 
         // Write Permissions.
-        $this->dispatchNow(new AppendEntityStreamLang($addon, $slug));
-        $this->dispatchNow(new AppendEntityPermissions($addon, $slug));
-        $this->dispatchNow(new AppendEntityPermissionLang($addon, $slug));
+        dispatch_now(new AppendEntityStreamLang($addon, $slug));
+        dispatch_now(new AppendEntityPermissions($addon, $slug));
+        dispatch_now(new AppendEntityPermissionLang($addon, $slug));
 
         // Module Specific.
         if ($addon->getType() == 'module') {
-            $this->dispatchNow(new AppendEntityRoutes($addon, $slug, $namespace));
-            $this->dispatchNow(new AppendEntitySection($addon, $slug, $namespace));
+            dispatch_now(new AppendEntityRoutes($addon, $slug, $namespace));
+            dispatch_now(new AppendEntitySection($addon, $slug, $namespace));
 
-            $this->dispatchNow(new AppendEntityButtonLang($addon, $slug));
-            $this->dispatchNow(new AppendEntitySectionLang($addon, $slug));
+            dispatch_now(new AppendEntityButtonLang($addon, $slug));
+            dispatch_now(new AppendEntitySectionLang($addon, $slug));
         }
 
         $this->call(

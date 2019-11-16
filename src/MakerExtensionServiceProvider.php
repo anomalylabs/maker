@@ -4,6 +4,7 @@ namespace Anomaly\MakerExtension;
 
 use Anomaly\MakerExtension\Console\MakeAddon;
 use Anomaly\MakerExtension\Console\MakeAddonMigration;
+use Anomaly\MakerExtension\Console\MakeStream;
 use Anomaly\Streams\Platform\Addon\AddonServiceProvider;
 use Illuminate\Contracts\Support\DeferrableProvider;
 
@@ -22,8 +23,17 @@ class MakerExtensionServiceProvider extends AddonServiceProvider implements Defe
      * @type array|null
      */
     public $commands = [
+
+        /**
+         * Addon Generators
+         */
         MakeAddon::class,
         MakeAddonMigration::class,
+
+        /**
+         * Stream Generators
+         */
+        MakeStream::class,
     ];
 
     /**
