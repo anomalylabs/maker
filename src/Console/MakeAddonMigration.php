@@ -58,6 +58,6 @@ class MakeAddonMigration extends Command
     public function handle()
     {
         [$vendor, $type, $slug] = addon_map($addon = $this->argument('addon'));
-        dd('Migration');
+        dd('MakeAddonMigration');
     }
 }
