@@ -1,31 +1,8 @@
 <?php
 
-namespace Anomaly\Streams\Platform\Addon\Console;
+namespace Anomaly\MakerExtension\Console;
 
-use Anomaly\Streams\Platform\Addon\Console\Command\MakeAddonMigrationPaths;
-use Anomaly\Streams\Platform\Addon\Console\Command\ScaffoldTheme;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonButtonLang;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonClass;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonComposer;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonFeatureTest;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonFieldLang;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonGitIgnore;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonLang;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPackage;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPermissionLang;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPermissions;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPhpUnit;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonSectionLang;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonServiceProvider;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonStreamLang;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonWebpack;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteThemePackage;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteThemeWebpack;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Config\Repository;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class MakeAddonMigration
