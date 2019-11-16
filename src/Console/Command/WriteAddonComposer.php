@@ -1,6 +1,6 @@
 <?php
 
-namespace Anomaly\Streams\Platform\Addon\Console\Command;
+namespace Anomaly\MakerExtension\Console\Command;
 
 use Anomaly\Streams\Platform\Support\Parser;
 use Illuminate\Filesystem\Filesystem;
