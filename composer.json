@@ -1,0 +1,16 @@
+{
+    "name": "anomaly/maker-extension",
+    "type": "streams-addon",
+    "autoload": {
+        "psr-4": {
+            "Anomaly\\MakerExtension\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Anomaly\\MakerExtension\\MakerExtensionServiceProvider"
+            ]
+        }
+    }
+}
