@@ -4,6 +4,12 @@ namespace Anomaly\MakerExtension;
 
 use Anomaly\Streams\Platform\Addon\Extension\Extension;
 
+/**
+ * Class MakerExtension
+ *
+ * @link   http://pyrocms.com/
+ * @author Ryan Thompson <ryan@pyrocms.com>
+ */
 class MakerExtension extends Extension
 {
 
@@ -13,17 +19,4 @@ class MakerExtension extends Extension
      * @var bool
      */
     protected $installed = true;
-
-    /**
-     * This extension provides...
-     *
-     * This should contain the dot namespace
-     * of the addon this extension is for followed
-     * by the purpose.variation of the extension.
-     *
-     * For example anomaly.module.store::gateway.stripe
-     *
-     * @var null|string
-     */
-    protected $provides = null;
 }
