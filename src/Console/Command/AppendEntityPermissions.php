@@ -2,11 +2,10 @@
 
 namespace Anomaly\MakerExtension\Console\Command;
 
-use Anomaly\Streams\Platform\Addon\Addon;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPermissions;
-use Anomaly\Streams\Platform\Support\Writer;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Anomaly\Streams\Platform\Addon\Addon;
+use Anomaly\Streams\Platform\Support\Writer;
+use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPermissions;
 
 /**
  * Class AppendEntityPermissions
@@ -17,7 +16,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class AppendEntityPermissions
 {
-    use DispatchesJobs;
 
     /**
      * The entity slug.
@@ -54,7 +52,7 @@ class AppendEntityPermissions
     public function handle(Writer $writer, Filesystem $files)
     {
         if (!$files->exists($path = $this->addon->getPath("resources/config/permissions.php"))) {
-            $this->dispatchNow(new WriteAddonPermissions($this->addon->getPath()));
+            dispatch_now(new WriteAddonPermissions($this->addon->getPath()));
         }
 
         $permissions = "    '{$this->slug}' => [\n";

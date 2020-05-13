@@ -2,11 +2,10 @@
 
 namespace Anomaly\MakerExtension\Console\Command;
 
-use Anomaly\Streams\Platform\Addon\Addon;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonButtonLang;
-use Anomaly\Streams\Platform\Support\Writer;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Anomaly\Streams\Platform\Addon\Addon;
+use Anomaly\Streams\Platform\Support\Writer;
+use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonButtonLang;
 
 /**
  * Class AppendEntityButtonLang
@@ -17,7 +16,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class AppendEntityButtonLang
 {
-    use DispatchesJobs;
 
     /**
      * The entity slug.
@@ -54,7 +52,7 @@ class AppendEntityButtonLang
     public function handle(Writer $writer, Filesystem $files)
     {
         if (!$files->exists($path = $this->addon->getPath("resources/lang/en/button.php"))) {
-            $this->dispatchNow(new WriteAddonButtonLang($this->addon->getPath()));
+            dispatch_now(new WriteAddonButtonLang($this->addon->getPath()));
         }
 
         $singular = str_singular($this->slug);

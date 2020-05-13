@@ -2,11 +2,10 @@
 
 namespace Anomaly\MakerExtension\Console\Command;
 
-use Anomaly\Streams\Platform\Addon\Addon;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPermissionLang;
-use Anomaly\Streams\Platform\Support\Writer;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Anomaly\Streams\Platform\Addon\Addon;
+use Anomaly\Streams\Platform\Support\Writer;
+use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonPermissionLang;
 
 /**
  * Class AppendEntityPermissionLang
@@ -17,7 +16,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class AppendEntityPermissionLang
 {
-    use DispatchesJobs;
 
     /**
      * The entity slug.
@@ -54,7 +52,7 @@ class AppendEntityPermissionLang
     public function handle(Writer $writer, Filesystem $files)
     {
         if (!$files->exists($path = $this->addon->getPath("resources/lang/en/permission.php"))) {
-            $this->dispatchNow(new WriteAddonPermissionLang($this->addon->getPath()));
+            dispatch_now(new WriteAddonPermissionLang($this->addon->getPath()));
         }
 
         $human = humanize($this->slug);

@@ -2,11 +2,10 @@
 
 namespace Anomaly\MakerExtension\Console\Command;
 
-use Anomaly\Streams\Platform\Addon\Addon;
-use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonSectionLang;
-use Anomaly\Streams\Platform\Support\Writer;
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use Anomaly\Streams\Platform\Addon\Addon;
+use Anomaly\Streams\Platform\Support\Writer;
+use Anomaly\Streams\Platform\Addon\Console\Command\WriteAddonSectionLang;
 
 /**
  * Class AppendEntitySectionLang
@@ -17,7 +16,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
  */
 class AppendEntitySectionLang
 {
-    use DispatchesJobs;
 
     /**
      * The entity slug.
@@ -54,7 +52,7 @@ class AppendEntitySectionLang
     public function handle(Writer $writer, Filesystem $files)
     {
         if (!$files->exists($path = $this->addon->getPath("resources/lang/en/section.php"))) {
-            $this->dispatchNow(new WriteAddonSectionLang($this->addon->getPath()));
+            dispatch_now(new WriteAddonSectionLang($this->addon->getPath()));
         }
 
         $name = ucfirst(humanize($this->slug));
