@@ -2,10 +2,10 @@
 
 namespace Anomaly\MakerExtension\Console\Command;
 
+use Illuminate\Support\Str;
+use Illuminate\Filesystem\Filesystem;
 use Anomaly\Streams\Platform\Addon\Addon;
 use Anomaly\Streams\Platform\Support\Parser;
-use Illuminate\Filesystem\Filesystem;
-use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * Class WriteEntityTestCases
@@ -77,7 +77,7 @@ class WriteEntityTestCases
         foreach ($filesystem->allFiles($this->addon->getPath("src/{$entity}")) as $file) {
 
             // Skip interfaces.
-            if (str_contains($file->getFilename(), 'Interface')) {
+            if (Str::contains($file->getFilename(), 'Interface')) {
                 continue;
             }
 
